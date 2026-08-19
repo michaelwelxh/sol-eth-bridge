@@ -41,4 +41,6 @@ contract modelTokenTest is Test {
 
         token.mint(1_000_000);
     }
+
+    // add a test for 'burnFrom' if i want but im testing the open zep func now so not much point
 }
