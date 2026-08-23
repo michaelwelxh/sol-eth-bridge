@@ -9,16 +9,41 @@ interface IBridge {
         uint256 destinationChain
     ) external;
 
+
+    function executeMessage(
+        bytes32 messageId, 
+        uint256 sourceChain,
+        uint256 destinationChain,
+        address sender, 
+        address recipient, 
+        uint256 amount
+    ) external;
+
     function pause() external;
     function unpause() external;
     
     event DepositCreated(
-        address indexed sender,
-        address indexed recipient,
-        uint256 amount,
+        bytes32 messageId,
+        uint256 sourceChain,
         uint256 destinationChain,
-        bytes32 messageId
+        address sender,
+        address recipient,
+        uint256 amount,
+        uint256 nonce
     );
-    
+    struct Message {
+        uint256 sourceChain;
+        uint256 destinationChain;
+        address sender;
+        address recipient;
+        uint256 amount;
+        uint256 nonce;
+    }
+
+    // relayer 
+    event RelayUpdated(address indexed oldRelayer, address indexed newRelayer);
+    function setRelayer(
+        address relayer
+        ) external;  
 
 }
